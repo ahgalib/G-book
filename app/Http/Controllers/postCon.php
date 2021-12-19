@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class postCon extends Controller
 {
@@ -21,6 +22,18 @@ class postCon extends Controller
             'image'=>$imagePath,
         ]);
         return redirect('/');
+    }
+
+    public function storeOnlyPost(Request $req){
+        $req->user()->posts()->create([
+            'body'=>$req->body,
+        ]);
+        return redirect('/');
+    }
+
+    public function postDelete(Post $post,Request $req){
+        $req->user()->posts()->where('id',$post->id)->delete();
+        return back();
     }
 
     

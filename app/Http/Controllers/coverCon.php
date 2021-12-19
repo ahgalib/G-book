@@ -11,7 +11,7 @@ class coverCon extends Controller
         return view('profile.addCoverPhoto');
     }
 
-    public function saveCreateCoverPhoto(User $user,Request $req){
+    public function saveCreateCoverPhoto(Request $req){
         $req->validate([
             'cover_photo_caption'=>'required',
             'cover_photo'=>'required',
@@ -21,6 +21,26 @@ class coverCon extends Controller
             'cover_photo_caption'=>$req->cover_photo_caption,
             'cover_photo'=>$coverPicPath,
         ]);
-        return redirect("/profilepage/{$user->id}");
+        return redirect("/profilepage/{$req->user()->id}");
+    }
+
+    public function editCoverPhoto(User $user){
+        return view('profile.editcoverphoto',compact('user'));
+    }
+
+    public function saveEditCoverPhoto(User $user){
+        $data = request()->validate([
+            'cover_photo_caption'=>'required',
+            'cover_photo'=>'',
+        ]);
+        if(request('cover_photo')){
+            $imagePath = request('cover_photo')->store('uploads','public');
+            $imageArray = ['cover_photo'=>$imagePath];
+        }
+        auth()->user()->CoverPicture->update(array_merge(
+            $data,
+            $imageArray??[],
+        ));
+        return redirect("profilepage/{$user->id}");
     }
 }

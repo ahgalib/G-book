@@ -52,4 +52,8 @@ class User extends Authenticatable
     public function CoverPicture(){
         return $this->hasOne(CoverPicture::class);
     }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
 }
