@@ -6,10 +6,8 @@
         <div class="col-md-10" style="margin-left:200px;">
             <form action="/savepost" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group row m-3">
-                    Enter caption for your image
-                    <label for="body" class="col-md-4 col-form-label"></label>
-
+                <div class="form-group">
+                    <label for="body" class="col-md-4 col-form-label">{{ __(' Enter your post') }}</label>
                     <div class="col-md-6">
                         <textarea id="body" cols="10" rows="6"type="text" name="body"class="form-control @error('body') is-invalid @enderror"value="{{old('body')}}"></textarea>
 
@@ -21,9 +19,8 @@
                     </div>
                 </div>
                 <!-- image -->
-                <div class="form-group">
-                    Add your image
-                    <label for="image" name="image" class="col-md-4 col-form-label"></label>
+                <div class="form-group p-2">
+                    <label for="image" name="image" class="col-md-4 col-form-label">{{ __('  Add your image') }}</label>
 
                     <div class="col-md-6">
                         <input type="file" name="image" id="image"class="form-control @error('image') is-invalid @enderror">

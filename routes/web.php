@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\postCon;
-
+use App\Http\Controllers\profileCon;
+use App\Http\Controllers\coverCon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +19,17 @@ use App\Http\Controllers\postCon;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Post route
 Route::get('/addpost',[postCon::class,'index']);
 Route::post('/savepost',[postCon::class,'savePost']);
+//Route::get('/showOnlypost/{user}',[postCon::class,'showOwnPosts']);//show of his own posts in the profile page
+
+//Profile route
+Route::get('/createprofile',[profileCon::class,'index']);
+Route::get('/profilepage/{user}',[profileCon::class,'show']);
+Route::post('/savecreateprofile',[profileCon::class,'saveCreateProfile']);
+
+
+//coverPhoto route
+Route::get('/createcoverphoto',[coverCon::class,'index']);
+Route::post('/savecreatecoverphoto',[coverCon::class,'saveCreateCoverPhoto']);

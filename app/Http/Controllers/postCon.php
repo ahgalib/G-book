@@ -22,4 +22,6 @@ class postCon extends Controller
         ]);
         return redirect('/');
     }
+
+    
 }

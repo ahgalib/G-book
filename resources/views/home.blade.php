@@ -12,7 +12,7 @@
                 @foreach($posts as $post)
                 <!--Post body and post image part start   -->
                     <div class="card-header p-4">
-                        <h3>{{$post->user->name}}</h3>
+                        <h3><a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;">{{$post->user->name}}</a></h3>
                         <p>{{$post->created_at->diffForHumans()}}</p>
                     </div>
                     <div class="card-body m-auto">
@@ -23,6 +23,12 @@
                 <!-- Post body and post image start part end  -->
                 @endforeach
             </div>
+            {{$posts->links()}}
+            <style>
+                .w-5{
+                    display:none;
+                }
+            </style>
         </div>
     </div>
 </div>
