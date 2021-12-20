@@ -5,6 +5,7 @@ use App\Http\Controllers\postCon;
 use App\Http\Controllers\profileCon;
 use App\Http\Controllers\coverCon;
 use App\Http\Controllers\postLikeCon;
+use App\Http\Controllers\commentCon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,3 +43,7 @@ Route::post('/savecreatecoverphoto',[coverCon::class,'saveCreateCoverPhoto']);
 //Post like Route
 Route::post('/like/{post}',[postLikeCon::class,'postlike']);
 Route::post('/deletelike/{post}',[postLikeCon::class,'postlikeDelete']);
+//comment route
+Route::get('/viewcomments/{post}',[commentCon::class,'viewCommentPost']);
+Route::get('/viewcommentsonly/{post}',[commentCon::class,'viewComment']);
+Route::post('/comment/{post}',[commentCon::class,'comment']);

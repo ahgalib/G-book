@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\PostComment;
 class HomeController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class HomeController extends Controller
      */
     public function index(User $user)
     {   
-        $post = Post::orderBy('created_at','DESC')->paginate(5);
+        $post = Post::orderBy('created_at','DESC')->paginate(4);
         return view('home',['posts'=>$post]);
     }
 }
