@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        
         <div class="col-md-6 bg-dark"style="margin-top:-25px;">
             <div class="card bg-dark text-light">
                 <form action="/savepostOnlyPost" method="post" enctype="multipart/form-data">
@@ -80,15 +79,16 @@
                         @else
                             <form action="/deletelike/{{$post->id}}" method="post">
                                 @csrf
-                                <button class="btn btn-danger mr-3">Unlike</button>
+                                <button class="btn btn-secondary mr-3">Unlike</button>
                             </form>
                         @endif
                         <p style="font-weight:bold;margin:5px;font-size:18px;color:gold;">{{$post->likes->count()}} Like</p>
                         <!--like option end -->
+
                         <!--comment option start -->
                         <a href="/viewcomments/{{$post->id}}"><button class="btn btn-light mr-3" style="margin-left:70px;">Comments</button></a>
                       
-                        <p style="font-weight:bold;margin:5px;font-size:18px;color:gold;">{{$post->PostComment->count()}} Comments</p>
+                        <p style="font-weight:bold;margin:5px;font-size:18px;color:white;">{{$post->PostComment->count()}} Comments</p>
                     </div>
                 
                     <div class="card-footer ">
