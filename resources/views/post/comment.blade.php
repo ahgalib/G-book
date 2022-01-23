@@ -8,9 +8,16 @@
                 <!--Post body and post image part start   -->
                 <div class="card-header p-4">
                     <div class="d-flex">
+                        @if($post->user->profile)
                         <div>
                             <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="/storage/{{$post->user->profile->profile_picture}}" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
                         </div>
+                        @else
+                        <div>
+                            <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
+                        </div>
+                        @endif
+                        
                         <div>
                             <h2 style="margin-top:20px;margin-left:20px;"><a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;">{{$post->user->name}}</a></h2>
                             <p style="margin-left:20px;">{{$post->created_at->diffForHumans()}}</p>
@@ -24,7 +31,7 @@
                     </div>
                 @else
                     <div class="card-body m-auto">
-                        <p style="font-weight:bold;font-size:20px;">{{$post->post->body}}</p>
+                        <p style="font-weight:bold;font-size:20px;">{{$post->body}}</p>
                         
                     </div>
                 @endif
@@ -32,7 +39,7 @@
             <!--like option start -->
                 <div class="d-flex p-4">
                     @if(!$post->likedBy(auth()->user()))
-                        <form action="/like/{{$post->post->id}}" method="post">
+                        <form action="/like/{{$post->id}}" method="post">
                             @csrf
                             <button class="btn btn-success mr-3"> like</button>
                         </form>
@@ -52,9 +59,16 @@
                 <form action="/comment/{{$post->id}}" method="post">
                     @csrf
                     <div class="d-flex">
+                    @if(Auth::user()->profile)
                         <div class="m-2">
-                            <img src="/storage/{{$post->user->profile->profile_picture}}" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
+                            <img src="/storage/{{Auth::user()->profile->profile_picture}}" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
                         </div>
+                        @else
+                        <div class="m-2">
+                            <img src="" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
+                        </div>
+                        @endif
+
                     <!-- .img-push is used to add margin to elements next to floating images -->
                         <div class="img-push m-2">
                             <input type="text" name="comment"placeholder="Press enter to post comment">

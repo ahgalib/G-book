@@ -7,12 +7,12 @@
             @if($user->CoverPicture)
                 <img src="/storage/{{$user->CoverPicture->cover_photo}}" style="width:1350px;height:400px;margin-left:-119px;margin-top:-25px;">
             @else
-               
                 <img src="" style="width:1350px;height:400px;margin-left:-119px;margin-top:-75px;">
                 @can('update',$user->profile)
                     <button class="btn btn-success btn-lg"><a href="/createcoverphoto"style="color:white;text-decoration:none;">Add cover Photo</a></button>
                 @endcan
             @endif
+            
             @if($user->profile)
                 <img src="/storage/{{$user->profile->profile_picture}}" class="rounded-circle" style="width:270px;height:220px;margin-top:-115px;margin-left:420px;">
                 <div style="margin-left:450px;">
@@ -22,7 +22,8 @@
                 </div>
             @else
                 <img src="" class="rounded-circle" style="width:270px;height:220px;margin-top:-115px;margin-left:300px;">
-                @can('update',$user->profile)
+                
+                @can('create',$user->profile)
                     <button class="btn btn-success btn-lg"><a href="/createprofile"style="color:white;text-decoration:none;">Create your profile</a></button>
                 @endcan
             @endif
@@ -35,17 +36,28 @@
                 @can('update',$user->profile)
                     <a href="/addpost"><button class="btn btn-primary m-2">Add a new post</button></a>
                     <a href="/editprofile/{{$user->id}}"><button class="btn btn-secondary m-3">Edit profile</button></a>
-                    <a href="/editcoverphoto/{{$user->id}}"><button class="btn btn-success m-2">Edit CoverPhoto</button></a>
+                    @if($user->CoverPicture)
+                        <a href="/editcoverphoto/{{$user->id}}"><button class="btn btn-success m-2">Edit CoverPhoto</button></a>
+                    @endif
+
                 @endcan
             </div>
             <!--   -->
             <div class="card bg-dark text-light">
                 @foreach($user->posts as $post)
                 <!--Post body and post image part start   -->
-                    <div class="d-flex">
-                        <img src="/storage/{{$post->user->profile->profile_picture}}" style="width:160px;height:140px;border-radius:50%;margin-top:20px;margin-left:20px" alt="">
-                        <p style="margin-top:60px;margin-left:20px;"><span style="color:#0dcaf0;font-size:20px;">{{$post->user->username}} </span> share his filling {{$post->created_at->diffForHumans()}}</p>
-                    </div>
+                    @if($post->user->profile)
+                        <div class="d-flex">
+                            <img src="/storage/{{$post->user->profile->profile_picture}}" style="width:160px;height:140px;border-radius:50%;margin-top:20px;margin-left:20px" alt="">
+                            <p style="margin-top:60px;margin-left:20px;"><span style="color:#0dcaf0;font-size:20px;">{{$post->user->username}} </span> share his filling {{$post->created_at->diffForHumans()}}</p>
+                        </div>
+                    @else
+                        <div class="d-flex">
+                            <img src="" style="width:160px;height:140px;border-radius:50%;margin-top:20px;margin-left:20px" alt="">
+                            <p style="margin-top:60px;margin-left:20px;"><span style="color:#0dcaf0;font-size:20px;">{{$post->user->username}} </span> share his filling {{$post->created_at->diffForHumans()}}</p>
+                        </div>
+                    @endif
+                   
                     <div class="card-body m-auto">
                         @if($post['image'])
                             <p style="font-weight:bold;font-size:20px;">{{$post['body']}}</p>
@@ -87,9 +99,16 @@
                         <form action="/comment/{{$post->id}}" method="post">
                             @csrf
                             <div class="d-flex">
-                                <div class="m-2">
-                                    <img src="/storage/{{Auth::user()->profile->profile_picture}}" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
-                                </div>
+                                @if(Auth::user()->profile)
+                                    <div class="m-2">
+                                        <img src="/storage/{{Auth::user()->profile->profile_picture}}" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
+                                    </div>
+                                @else
+                                    <div class="m-2">
+                                        <img src="" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
+                                    </div>
+                                @endif
+                                
                             <!-- .img-push is used to add margin to elements next to floating images -->
                                 <div class="img-push m-2">
                                     <input type="text" name="comment"placeholder="Press enter to post comment">

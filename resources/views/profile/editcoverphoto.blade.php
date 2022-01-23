@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-        <h2>Edit Cover Photo</h2>
-        <form  method="POST" action="/saveeditcoverphoto/{{$user->id}}" enctype="multipart/form-data">
-            @csrf
-            @method('PATCH')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Edit Cover Photo</h2>
+            <form  method="POST" action="/saveeditcoverphoto/{{$user->id}}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
                 <div class="form-group row pb-2">
                     <label for="bio" class="col-md-4 col-form-label text-md-right">{{ __('caption') }}</label>
 
@@ -37,6 +40,10 @@
                         <button type="submit" class="btn btn-primary">Upload </button>
                     </div>
                 </div>
-        </form>
+            </form>
+        </div>
+    </div>
+</div>
+        
 
 @endsection

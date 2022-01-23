@@ -45,5 +45,4 @@ Route::post('/like/{post}',[postLikeCon::class,'postlike']);
 Route::post('/deletelike/{post}',[postLikeCon::class,'postlikeDelete']);
 //comment route
 Route::get('/viewcomments/{post}',[commentCon::class,'viewCommentPost']);
-Route::get('/viewcommentsonly/{post}',[commentCon::class,'viewComment']);
 Route::post('/comment/{post}',[commentCon::class,'comment']);

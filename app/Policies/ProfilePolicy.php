@@ -39,9 +39,9 @@ class ProfilePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Profile $profile)
     {
-        //
+        return $user->id == $profile->user_id;
     }
 
     /**
@@ -55,6 +55,7 @@ class ProfilePolicy
     {
         return $user->id == $profile->user_id;
     }
+    
 
     /**
      * Determine whether the user can delete the model.

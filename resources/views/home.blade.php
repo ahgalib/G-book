@@ -49,7 +49,11 @@
                     <div class="card-header p-4">
                         <div class="d-flex">
                             <div>
-                                <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="/storage/{{$post->user->profile->profile_picture}}" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
+                                @if($post->user->profile)
+                                    <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="/storage/{{$post->user->profile->profile_picture}}" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
+                                @else
+                                    <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
+                                @endif
                             </div>
                             <div>
                                 <h2 style="margin-top:20px;margin-left:20px;"><a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;">{{$post->user->name}}</a></h2>
@@ -96,7 +100,12 @@
                             @csrf
                             <div class="d-flex">
                                 <div class="m-2">
-                                    <img src="/storage/{{Auth::user()->profile->profile_picture}}" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
+                                    @if(!Auth::user()->profile)
+                                        <img src="" class="img-fluid img-circle img-sm" alt="" style="width:50px;height:40px;border-radius:50%;">
+                                    @else
+                                        <img src="/storage/{{Auth::user()->profile->profile_picture}}" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
+                                    @endif
+                                    
                                 </div>
                             <!-- .img-push is used to add margin to elements next to floating images -->
                                 <div class="img-push m-2">
