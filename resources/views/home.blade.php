@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -33,7 +32,7 @@
             <!-- button design  -->
             <div class="bg-dark p-3" >
                 <a href="/addpost"><button class="btn btn-primary m-3">Add a new post with picture!!</button></a>
-                <a href="/profilepage/{{Auth::user()->id}}"><button class="btn btn-danger m-3">Visit Your Profile</button></a>
+                <a href="/newVersionprofilepage/{{Auth::user()->id}}"><button class="btn btn-danger m-3">Visit Your Profile</button></a>
             </div>
             <!-- button design end -->
         </div>
@@ -50,13 +49,13 @@
                         <div class="d-flex">
                             <div>
                                 @if($post->user->profile)
-                                    <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="/storage/{{$post->user->profile->profile_picture}}" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
+                                    <a href="/newVersionprofilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="/storage/{{$post->user->profile->profile_picture}}" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
                                 @else
-                                    <a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
+                                    <a href="/newVersionprofilepage/{{$post->user->id}}"style="text-decoration:none;"><img src="" style="width:150px;height:120px;border-radius:50%;" alt=""></a>
                                 @endif
                             </div>
                             <div>
-                                <h2 style="margin-top:20px;margin-left:20px;"><a href="/profilepage/{{$post->user->id}}"style="text-decoration:none;">{{$post->user->name}}</a></h2>
+                                <h2 style="margin-top:20px;margin-left:20px;"><a href="/newVersionprofilepage/{{$post->user->id}}"style="text-decoration:none;">{{$post->user->name}}</a></h2>
                                 <p style="margin-left:20px;">{{$post->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
@@ -109,7 +108,8 @@
                                 </div>
                             <!-- .img-push is used to add margin to elements next to floating images -->
                                 <div class="img-push m-2">
-                                    <input type="text" name="comment"placeholder="Press enter to post comment">
+                                    <input type="text" class="form-control" name="comment"placeholder="Press enter to post comment">
+                                    <span style="color:red;">@error('comment'){{$message}} @enderror</span>
                                 </div>
                                 <div class="m-2">
                                     <button class="btn btn-primary btn-sm">comment</button>

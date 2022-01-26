@@ -10,6 +10,9 @@ use App\Models\PostComment;
 class commentCon extends Controller
 {
     public function comment(Post $post,Request $req){
+        $req->validate([
+            'comment'=>'required',
+        ]);
         $post->PostComment()->create([
             'user_id'=>$req->user()->id,
             'comment'=>$req->comment,

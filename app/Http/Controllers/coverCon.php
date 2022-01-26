@@ -21,7 +21,7 @@ class coverCon extends Controller
             'cover_photo_caption'=>$req->cover_photo_caption,
             'cover_photo'=>$coverPicPath,
         ]);
-        return redirect("/profilepage/{$req->user()->id}");
+        return redirect("/newVersionprofilepage/{$req->user()->id}");
     }
 
     public function editCoverPhoto(User $user){
@@ -41,6 +41,6 @@ class coverCon extends Controller
             $data,
             $imageArray??[],
         ));
-        return redirect("profilepage/{$user->id}");
+        return redirect("newVersionprofilepage/{$user->id}");
     }
 }

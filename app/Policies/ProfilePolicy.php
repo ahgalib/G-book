@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+
 class ProfilePolicy
 {
     use HandlesAuthorization;
@@ -37,6 +38,7 @@ class ProfilePolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
+     * 
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user, Profile $profile)

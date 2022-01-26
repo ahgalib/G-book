@@ -27,7 +27,7 @@ class profileCon extends Controller
             'profile_picture_caption'=>$req->profile_picture_caption,
             'profile_picture'=>$imagePath,
         ]);
-        return redirect("/profilepage/{$req->user()->id}");
+        return redirect("/newVersionprofilepage/{$req->user()->id}");
     }
 
     public function editProfile(User $user){
@@ -49,7 +49,13 @@ class profileCon extends Controller
             $data,
             $imageArray??[],
         ));
-        return redirect("/profilepage/{$user->id}");
+        return redirect("/newVersionprofilepage/{$user->id}");
+    }
+
+    //new version fo profile
+    public function newVersionprofilepageShow(User $user){
+        $posts = $user->posts();
+        return view('profile.version-update.profile',['user'=>$user,'posts'=>$posts]);
     }
 
 

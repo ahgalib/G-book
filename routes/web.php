@@ -6,6 +6,7 @@ use App\Http\Controllers\profileCon;
 use App\Http\Controllers\coverCon;
 use App\Http\Controllers\postLikeCon;
 use App\Http\Controllers\commentCon;
+use App\Http\Controllers\aboutMeCon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,8 @@ Route::delete('/deletepost/{post}',[postCon::class,'postDelete']);
 Route::get('/createprofile',[profileCon::class,'index']);
 Route::get('/profilepage/{user}',[profileCon::class,'show']);
 Route::post('/savecreateprofile',[profileCon::class,'saveCreateProfile']);
+//Update version of profile page
+Route::get('/newVersionprofilepage/{user}',[profileCon::class,'newVersionprofilepageShow']);
 //Edit profile
 Route::get('/editprofile/{user}',[profileCon::class,'editProfile']);
 Route::patch('/saveeditporfile/{user}',[profileCon::class,'saveEditProfile']);
@@ -40,6 +43,9 @@ Route::patch('saveeditcoverphoto/{user}',[coverCon::class,'saveEditCoverPhoto'])
 //coverPhoto route
 Route::get('/createcoverphoto',[coverCon::class,'index']);
 Route::post('/savecreatecoverphoto',[coverCon::class,'saveCreateCoverPhoto']);
+//AboutMe route
+Route::get('aboutMe',[aboutMeCon::class,'showindex']);
+Route::post('saveaboutMe',[aboutMeCon::class,'saveAboutMe']);
 //Post like Route
 Route::post('/like/{post}',[postLikeCon::class,'postlike']);
 Route::post('/deletelike/{post}',[postLikeCon::class,'postlikeDelete']);
