@@ -7,6 +7,7 @@ use App\Http\Controllers\coverCon;
 use App\Http\Controllers\postLikeCon;
 use App\Http\Controllers\commentCon;
 use App\Http\Controllers\aboutMeCon;
+use App\Http\Controllers\settingCon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,3 +53,7 @@ Route::post('/deletelike/{post}',[postLikeCon::class,'postlikeDelete']);
 //comment route
 Route::get('/viewcomments/{post}',[commentCon::class,'viewCommentPost']);
 Route::post('/comment/{post}',[commentCon::class,'comment']);
+//setting route
+Route::get('/setting',[settingCon::class,'showSettingPage']);
+Route::get('/settingLoginPage',[settingCon::class,'showSettingLoginPage']);
+Route::post('/checkLogin',[settingCon::class,'checkLoginFunctionality']);

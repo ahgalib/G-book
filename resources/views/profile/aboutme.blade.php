@@ -73,6 +73,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <button type="submit" class="btn btn-primary">
+                                   <a href="/newVersionprofilepage/{{Auth::user()->id}}" class="text-light">back</a>
+                                </button>
                             </div>
                         </div>
                     </form>

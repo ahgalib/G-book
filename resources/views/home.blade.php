@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-6 bg-dark"style="margin-top:-25px;">
             <div class="card bg-dark text-light">
@@ -33,6 +33,7 @@
             <div class="bg-dark p-3" >
                 <a href="/addpost"><button class="btn btn-primary m-3">Add a new post with picture!!</button></a>
                 <a href="/newVersionprofilepage/{{Auth::user()->id}}"><button class="btn btn-danger m-3">Visit Your Profile</button></a>
+                <a href="/settingLoginPage"><button class="btn btn-danger m-3">Setting</button></a>
             </div>
             <!-- button design end -->
         </div>
