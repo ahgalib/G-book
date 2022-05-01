@@ -57,3 +57,4 @@ Route::post('/comment/{post}',[commentCon::class,'comment']);
 Route::get('/setting',[settingCon::class,'showSettingPage']);
 Route::get('/settingLoginPage',[settingCon::class,'showSettingLoginPage']);
 Route::post('/checkLogin',[settingCon::class,'checkLoginFunctionality']);
+Route::post('/updatePassword',[settingCon::class,'updatePassword']);

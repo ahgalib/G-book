@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index(User $user)
     {   
-        $post = Post::orderBy('created_at','DESC')->paginate(4);
+        $post = Post::orderBy('created_at','DESC')->SimplePaginate(4);
         return view('home',['posts'=>$post]);
     }
 }

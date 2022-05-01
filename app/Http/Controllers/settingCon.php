@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Hash;
 use Auth;
 use Session;
@@ -27,5 +28,20 @@ class settingCon extends Controller
         }else{
             return back()->with('error','your password are not matched');
         }
+    }
+
+    public function updatePassword(Request $request){
+        $data = $request->validate([
+            'current_password'=>['required'],
+            'password'=>['required','confirmed'],
+
+        ]);
+        if(Hash::check($data['current_password'],Auth::user()->password)){
+            User::where('id',Auth::user()->id)->update(['password'=>bcrypt($data['password'])]);
+            return back()->with('success','Your Password Updated Successfully');
+        }else{
+            return back()->with('error','Your Current Password is incorrect ');
+        }
+       
     }
 }
