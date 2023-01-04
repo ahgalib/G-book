@@ -30,7 +30,7 @@
 </head>
 <body style="background-color:#21d1a0">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #df3161!important;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #4ad31d!!important;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="color:oldlace;">
                     {{ config('Welcome to G-FackBook', 'Welcome to G-FackBook') }}
@@ -90,6 +90,8 @@
         </main>
     </div>
 <!-- jQuery -->
+<script src="{{ url('jsAjax/jquery.min.js') }}"></script>
+<script src="{{ url('jsAjax/jsAjax.js') }}"></script>
 <script src="{{ url('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

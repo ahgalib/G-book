@@ -19,7 +19,7 @@ class profileCon extends Controller
     }
 
     public function saveCreateProfile(Request $req){
-       
+
         $imagePath = request('profile_picture')->store('uploads','public');
         $req->user()->profile()->create([
             'bio'=>$req->bio,
@@ -59,5 +59,5 @@ class profileCon extends Controller
     }
 
 
-    
+
 }

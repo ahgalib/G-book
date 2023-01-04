@@ -10,7 +10,7 @@
                         @if($user->CoverPicture)
                             <img src="/storage/{{$user->CoverPicture->cover_photo}}" style="width:1332px;margin-top:-23px;height:400px;">
                         @else
-                            
+
                             @can('update',$user->profile)
                                 <button class="btn btn-success btn-lg"><a href="/createcoverphoto"style="color:white;text-decoration:none;">Add cover Photo</a></button>
                             @endcan
@@ -40,16 +40,28 @@
                                 <p class="text-muted text-center">Software Engineer</p>
 
                                 <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>{{$user->profile->bio}}</b> 
-                                </li>
-                                <li class="list-group-item">
-                                <b><a href="">{{$user->profile->url}}</a></b> 
-                                </li>
-                                
+                                    <li class="list-group-item">
+                                        <b>{{$user->profile->bio}}</b>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b><a href="">{{$user->profile->url}}</a></b>
+                                    </li>
+                                    <h6>{{$user->profile->follower->count()}} Followers followes {{$user->name}}</h6>
                                 </ul>
-
-                                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                @if($user->id == auth::user()->id)
+                                @else
+                                    @if(!$user->profile->followedBy(auth()->user()))
+                                        <form action="{{route('followers',$user->profile->id)}}" method="post">
+                                            @csrf
+                                            <button class="btn btn-primary btn-block"><b>Follow</b></button>
+                                        </form>
+                                    @else
+                                        <form action="{{route('following',auth()->user()->id)}}" method="post">
+                                            @csrf
+                                            <button class="btn btn-secondary btn-block"><b>UnFollow</b></button>
+                                        </form>
+                                    @endif
+                                @endif
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -69,29 +81,19 @@
                             @else
                                 <div class="card-body">
                                     <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
                                     <p class="text-muted">
                                     {{$user->aboutMe->Education}}
                                     </p>
-
                                     <hr>
-
                                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
                                     <p class="text-muted"> {{$user->aboutMe->location}}</p>
-
                                     <hr>
-
                                     <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
                                     <p class="text-muted">
                                     {{$user->aboutMe->skill}}
                                     </p>
-
                                     <hr>
-
                                     <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
                                     <p class="text-muted"> {{$user->aboutMe->note}}</p>
                                 </div>
                             @endif
@@ -133,13 +135,13 @@
                                                     @if($post['image'])
                                                         <p style="font-weight:bold;font-size:20px;">{{$post['body']}}</p>
                                                         <img src="/storage/{{$post['image']}}" style="width:500px;height:460px;" alt="">
-                                                    
+
                                                     @else
                                                         <p style="font-weight:bold;font-size:20px;">{{$post['body']}}</p>
                                                     @endif
                                                 </div>
                                                 <!--like option start -->
-                                                <div class="d-flex p-4">
+                                                {{-- <div class="d-flex p-4">
                                                     @if(!$post->likedBy(auth()->user()))
                                                         <form action="/like/{{$post->id}}" method="post">
                                                             @csrf
@@ -152,13 +154,37 @@
                                                         </form>
                                                     @endif
                                                     <p style="font-weight:bold;margin:5px;font-size:18px;color:#078bc1;">{{$post->likes->count()}} Like</p>
-                                                    
-                                                   
+
+
                                                     <!--comment option start -->
                                                     <a href="/viewcomments/{{$post->id}}"><button class="btn btn-secondary mr-3" style="margin-left:70px;">Comments</button></a>
-                                                
+
+                                                    <p style="font-weight:bold;margin:5px;font-size:18px;color:#b5079f;">{{$post->PostComment->count()}} Comments</p>
+                                                </div> --}}
+                                                {{-- ajax like and unlike --}}
+                                                <div class="d-flex p-4">
+                                                    @if(!$post->likedBy(auth()->user()))
+                                                        <div class="ajaxlike">
+
+                                                            @include('profile.version-update.ajaxLike')
+                                                        </div>
+
+                                                    @else
+
+
+                                                            <button class="btn btn-dark mr-3"><i class="far fa-thumbs-down mr-1"></i></button>
+
+                                                    @endif
+                                                    <p style="font-weight:bold;margin:5px;font-size:18px;color:#078bc1;">{{$post->likes->count()}} Like</p>
+
+
+                                                    <!--comment option start -->
+                                                    <a href="/viewcomments/{{$post->id}}"><button class="btn btn-secondary mr-3" style="margin-left:70px;">Comments</button></a>
+
                                                     <p style="font-weight:bold;margin:5px;font-size:18px;color:#b5079f;">{{$post->PostComment->count()}} Comments</p>
                                                 </div>
+
+
                                                 <div class="card-footer ">
                                                     <form action="/comment/{{$post->id}}" method="post">
                                                         @csrf
@@ -172,7 +198,7 @@
                                                                     <img src="" class="img-fluid img-circle img-sm" alt="Alt Text" style="width:50px;height:40px;border-radius:50%;">
                                                                 </div>
                                                             @endif
-                                                            
+
                                                             <!-- .img-push is used to add margin to elements next to floating images -->
                                                             <div class="img-push m-2">
                                                                 <input type="text" class="form-control" name="comment"placeholder="Press enter to post comment">
@@ -180,7 +206,7 @@
                                                             </div>
                                                             <div class="m-2">
                                                                 <button class="btn btn-primary btn-sm">comment</button>
-                                                            
+
                                                             </div>
                                                         </div>
                                                         @can('update',$user->profile)
@@ -223,5 +249,5 @@
 
 
 
- 
+
 @endsection

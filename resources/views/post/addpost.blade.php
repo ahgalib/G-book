@@ -23,7 +23,7 @@
                     <label for="image" name="image" class="col-md-4 col-form-label">{{ __('  Add your image') }}</label>
 
                     <div class="col-md-6">
-                        <input type="file" name="image" id="image"class="form-control @error('image') is-invalid @enderror">
+                        <input type="file" multiple="" name="image[]" id="image"class="form-control @error('image') is-invalid @enderror">
 
                         @error('image')
                             <span style="color:red;">

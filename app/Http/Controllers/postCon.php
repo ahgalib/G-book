@@ -13,14 +13,22 @@ class postCon extends Controller
 
     public function savePost(Request $req){
         $req->validate([
-            'body'=>'required',
+            'body'=>'',
             'image'=>'required'
         ]);
-        $imagePath = request('image')->store('uploads','public');
-        $req->user()->posts()->create([
-            'body'=>$req->body,
-            'image'=>$imagePath,
-        ]);
+        $images = $req->file('image');
+        foreach ($images as $key => $image) {
+            $imagePath =  $image->store('uploads','public');
+            $req->user()->posts()->create([
+                'body'=>$req->body,
+                'image'=>$imagePath,
+            ]);
+        }
+        // $imagePath = request('image')->store('uploads','public');
+        // $req->user()->posts()->create([
+        //     'body'=>$req->body,
+        //     'image'=>$imagePath,
+        // ]);
         return redirect('/');
     }
 

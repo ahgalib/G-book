@@ -8,6 +8,7 @@ use App\Http\Controllers\postLikeCon;
 use App\Http\Controllers\commentCon;
 use App\Http\Controllers\aboutMeCon;
 use App\Http\Controllers\settingCon;
+use App\Http\Controllers\FollowerCon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +49,9 @@ Route::post('/savecreatecoverphoto',[coverCon::class,'saveCreateCoverPhoto']);
 Route::get('aboutMe',[aboutMeCon::class,'showindex']);
 Route::post('saveaboutMe',[aboutMeCon::class,'saveAboutMe']);
 //Post like Route
-Route::post('/like/{post}',[postLikeCon::class,'postlike']);
+// Route::post('/like/{post}',[postLikeCon::class,'postlike']);
+//ajax like
+Route::post('/like',[postLikeCon::class,'postlike']);
 Route::post('/deletelike/{post}',[postLikeCon::class,'postlikeDelete']);
 //comment route
 Route::get('/viewcomments/{post}',[commentCon::class,'viewCommentPost']);
@@ -58,3 +61,6 @@ Route::get('/setting',[settingCon::class,'showSettingPage']);
 Route::get('/settingLoginPage',[settingCon::class,'showSettingLoginPage']);
 Route::post('/checkLogin',[settingCon::class,'checkLoginFunctionality']);
 Route::post('/updatePassword',[settingCon::class,'updatePassword']);
+//followes and following
+Route::post('/followers/{id}',[FollowerCon::class,'followers'])->name('followers');
+Route::post('/following/{id}',[FollowerCon::class,'following'])->name('following');

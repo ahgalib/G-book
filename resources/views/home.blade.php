@@ -62,6 +62,9 @@
                         </div>
                     </div>
                     @if($post['image'])
+                        @if($post['image[]'])
+                            <h1>There should be more photo</h1>
+                        @endif
                         <div class="card-body m-auto">
                             <p style="font-weight:bold;font-size:20px;">{{$post['body']}}</p>
                             <img src="storage/{{$post['image']}}" style="width:500px;height:490px;" alt="">
